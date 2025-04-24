@@ -1,9 +1,0 @@
-GRANJA AVÍCOLA LLANO GRANDE S.A.S
-NIT: 870545489-0
-FACTURA DE VENTA
-Cliente: Jorge Alberto Roncancio
-Documento: 10068600337
-Artículo: 10 cubeta(s) de huevo ROJO tamaño EXTRA
-Subtotal: $150000
-IVA (5%): $7500
-Total a pagar: $157500

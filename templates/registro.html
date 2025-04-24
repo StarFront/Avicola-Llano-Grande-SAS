@@ -3,16 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <title>Registro de Huevos</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+  <button onclick="window.history.back()" class="btn-volver">← Volver</button>
+  <div class="formulario-huevos">
   <h1>Registrar Huevos</h1>
 
   <form id="formRegistro">
-    <label>Tipo:</label>
-    <select id="tipo" required>
-      <option value="ROJO">Rojo</option>
-      <option value="BLANCO">Blanco</option>
-    </select><br><br>
+    <label>Tipo:</label><br>
+    <div class="tipo-opciones">
+      <img src="{{ url_for('static', filename='img/huevo_rojo.png') }}" alt="Huevo Rojo" 
+           class="tipo-img" data-tipo="ROJO">
+      <img src="{{ url_for('static', filename='img/huevo_blanco.jpg') }}" alt="Huevo Blanco" 
+           class="tipo-img" data-tipo="BLANCO">
+    </div>
+    <input type="hidden" id="tipo" required><br><br>
 
     <label>Tamaño:</label>
     <select id="tamano" required>
@@ -25,20 +31,37 @@
     <label>Cantidad de cubetas:</label>
     <input type="number" id="cubetas" required min="1" /><br><br>
 
-    <button type="submit">Registrar</button>
+    <button type="submit" class="boton-registrar">Registrar</button>
   </form>
 
   <p id="respuesta"></p>
+ 
+
 
   <script>
     const form = document.getElementById("formRegistro");
+    const tipoInput = document.getElementById("tipo");
+    const imagenesTipo = document.querySelectorAll(".tipo-img");
+
+    imagenesTipo.forEach(img => {
+      img.addEventListener("click", () => {
+        imagenesTipo.forEach(i => i.classList.remove("seleccionado"));
+        img.classList.add("seleccionado");
+        tipoInput.value = img.dataset.tipo;
+      });
+    });
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const tipo = document.getElementById("tipo").value;
+      if (!tipoInput.value) {
+        document.getElementById("respuesta").textContent = "Selecciona un tipo de huevo.";
+        return;
+      }
+
       const tamaño = document.getElementById("tamano").value;
       const cantidad_cubetas = document.getElementById("cubetas").value;
+      const tipo = tipoInput.value;
 
       const datos = { tipo, tamaño, cantidad_cubetas };
 
@@ -52,5 +75,8 @@
       document.getElementById("respuesta").textContent = resultado.mensaje || resultado.error;
     });
   </script>
+  </div>
 </body>
+
+
 </html>

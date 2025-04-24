@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+from flask import Response
 from flask import Flask, request, jsonify, render_template
 from connection import huevos_collection
 
@@ -105,25 +106,22 @@ def vender_huevos():
     nuevo_stock = existente["stock_unidades"] - unidades
     huevos_collection.update_one(filtro, {"$set": {"stock_unidades": nuevo_stock}})
 
-    # Crear factura
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    nombre_archivo = f"factura_{cliente.replace(' ', '_')}_{timestamp}.txt"
-    ruta_factura = os.path.join("facturas", nombre_archivo)
-
-    os.makedirs("facturas", exist_ok=True)
-
-    with open(ruta_factura, "w", encoding="utf-8") as f:
-        f.write("GRANJA AVÍCOLA LLANO GRANDE S.A.S\n")
-        f.write("NIT: 870545489-0\n")
-        f.write("FACTURA DE VENTA\n")
-        f.write(f"Cliente: {cliente}\n")
-        f.write(f"Documento: {documento}\n")
-        f.write(f"Artículo: {cantidad} {unidad.lower()}(s) de huevo {tipo} tamaño {tamaño}\n")
-        f.write(f"Subtotal: ${subtotal}\n")
-        f.write(f"IVA (5%): ${iva}\n")
-        f.write(f"Total a pagar: ${total}\n")
-
-    return jsonify({"mensaje": f"Venta realizada con éxito. Factura generada: {nombre_archivo}"}), 200
+    # Crear factura en memoria
+    factura_lines = []
+    factura_lines.append(f"Factura de venta - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+    factura_lines.append(f"Cliente: {cliente}\n")
+    factura_lines.append(f"Documento: {documento}\n")
+    factura_lines.append(f"Tipo de cliente: {tipo_cliente}\n")
+    factura_lines.append(f"Artículo: {cantidad} {unidad.lower()}(s) de huevo {tipo} tamaño {tamaño}\n")
+    factura_lines.append(f"Subtotal: ${subtotal}\n")
+    factura_lines.append(f"IVA (5%): ${iva}\n")
+    factura_lines.append(f"Total a pagar: ${total}\n")
+    print(data)
+    # Devolver factura como respuesta para descarga
+    content = "\n".join(factura_lines)
+    return Response(content, mimetype='text/plain', headers={
+        'Content-Disposition': f'attachment; filename=factura_{cliente.replace(" ", "_")}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.txt'
+    })
 
 
 if __name__ == '__main__':
