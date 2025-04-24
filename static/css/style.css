@@ -1,0 +1,182 @@
+/* Eliminar el scroll lateral */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+}
+
+
+.top-bar {
+    background-color: #eee;
+    color: #666;
+    padding: 8px 20px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.top-bar .resaltado {
+    color: #444;
+    font-weight: bold;
+}
+
+.icono-centro {
+    width: 20px;
+    height: 20px;
+}
+
+.main-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(90deg, #ff7b00, #ffaa00);
+}
+
+.nav-menu {
+    flex: 1;
+    text-align: center;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 8px 16px;
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.nav-menu a:hover {
+    background-color: rgba(255,255,255,0.4);
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    margin: 0 20px;
+}
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* alineamos arriba para que crezca según imagen */
+    padding: 60px 20px;
+    background: linear-gradient(to right, #ffaa00, #ffd000);
+    color: #fff;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    min-height: auto;
+    padding-bottom: 0px;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1300px;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.hero h1 {
+    font-size: 70px; /* texto proporcional al nuevo tamaño */
+    font-weight: 900;
+    line-height: 1.2;
+    max-width: 700px;
+}
+
+.img-publi {
+    width: 500px;
+    height: auto;
+    border-radius: 24px;
+    margin-top: 10px;
+}
+
+
+
+.contador {
+    text-align: center;
+    margin: 60px auto;
+    font-size: 24px;
+}
+
+#contador-ventas {
+    font-size: 48px;
+    color: #ff7b00;
+    font-weight: bold;
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.critica-pollos {
+    display: flex;
+    justify-content: center;
+    background-color: #fff2e6;
+    padding: 40px 20px;
+}
+
+.contenido-critica {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    max-width: 1200px;
+}
+
+.img-pollo-critica {
+    width: 500px;
+    height: auto;
+    /* border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2); */
+}
+
+.texto-critica {
+    font-size: 30px;
+    color: #3d0000;
+    font-style: italic;
+    max-width: 700px;
+}
+
+.iconos-info {
+    background-color: #fff8f0;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.contenedor-iconos {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.icono-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 150px;
+}
+
+.icono-item img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.icono-item p {
+    font-size: 16px;
+    color: #333;
+}
+

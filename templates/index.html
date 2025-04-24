@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio - Llano Grande</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+
+    <!-- Aviso superior -->
+    <div class="top-bar">
+        SOMOS AVALADOS POR <span class="resaltado">EL CENTRO DEMOCRÁTICO</span>
+        <img src="{{ url_for('static', filename='img/centro_democratico.png') }}" alt="Centro Democrático" class="icono-centro">
+    </div>
+
+    <!-- Header -->
+    <header class="main-header animate__animated animate__fadeInDown animate__fast">
+
+        <nav class="nav-menu">
+            <a href="{{ url_for('registro') }}">Stock</a>
+        </nav>
+        <img src="{{ url_for('static', filename='img/pollos.png') }}" alt="Logo" class="logo">
+        <nav class="nav-menu">
+            <a href="{{ url_for('venta') }}">Venta</a>
+        </nav>
+    </header>
+
+    <!-- Eslogan principal -->
+    <section class="hero animate__animated animate__fadeInDown">
+        <div class="hero-content">
+            <h1>SI ES LLANO GRANDE, ES DUDABLE</h1>
+            <img src="{{ url_for('static', filename='img/tony.png') }}" alt="Publicidad" class="img-publi">
+        </div>
+    </section>
+
+    <!-- Contador de ventas -->
+    <section class="contador">
+        <h2>Ventas realizadas:</h2>
+        <p id="contador-ventas">0</p>
+    </section>
+
+    <!-- Crítica bizarramente malvada a los pollos -->
+<section class="critica-pollos">
+    <div class="contenido-critica">
+        <img src="{{ url_for('static', filename='img/pollos.png') }}" alt="Pollo malvado" class="img-pollo-critica">
+        <p class="texto-critica">
+            Pollos con crecimiento acelerado, criados en condiciones inadecuadas, alimentados con hormonas y antibióticos. Estrés y hacinamiento. Nuestra calidad es diferente. 
+        </p>
+    </div>
+</section>
+
+<!-- Sección de íconos -->
+<section class="iconos-info">
+    <div class="contenedor-iconos">
+        <div class="icono-item">
+            <img src="{{ url_for('static', filename='img/icon_1.png') }}" alt="Ícono 1">
+            <p>Empaque que contamina el doble</p>
+        </div>
+        <div class="icono-item">
+            <img src="{{ url_for('static', filename='img/icon_2.png') }}" alt="Ícono 2">
+            <p>Sabores interesantes</p>
+        </div>
+        <div class="icono-item">
+            <img src="{{ url_for('static', filename='img/icon_3.png') }}" alt="Ícono 3">
+            <p>Productos Viejos</p>
+        </div>
+        <div class="icono-item">
+            <img src="{{ url_for('static', filename='img/icon_4.png') }}" alt="Ícono 4">
+            <p>Cadena de Transporte Sucia</p>
+        </div>
+        <div class="icono-item">
+            <img src="{{ url_for('static', filename='img/icon_5.png') }}" alt="Ícono 5">
+            <p>Empresa Colombiana</p>
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>
