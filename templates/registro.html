@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registro de Huevos</title>
+</head>
+<body>
+  <h1>Registrar Huevos</h1>
+
+  <form id="formRegistro">
+    <label>Tipo:</label>
+    <select id="tipo" required>
+      <option value="ROJO">Rojo</option>
+      <option value="BLANCO">Blanco</option>
+    </select><br><br>
+
+    <label>Tamaño:</label>
+    <select id="tamano" required>
+      <option value="A">A</option>
+      <option value="AA">AA</option>
+      <option value="B">B</option>
+      <option value="EXTRA">EXTRA</option>
+    </select><br><br>
+
+    <label>Cantidad de cubetas:</label>
+    <input type="number" id="cubetas" required min="1" /><br><br>
+
+    <button type="submit">Registrar</button>
+  </form>
+
+  <p id="respuesta"></p>
+
+  <script>
+    const form = document.getElementById("formRegistro");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const tipo = document.getElementById("tipo").value;
+      const tamaño = document.getElementById("tamano").value;
+      const cantidad_cubetas = document.getElementById("cubetas").value;
+
+      const datos = { tipo, tamaño, cantidad_cubetas };
+
+      const respuesta = await fetch("/registrar_huevos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(datos)
+      });
+
+      const resultado = await respuesta.json();
+      document.getElementById("respuesta").textContent = resultado.mensaje || resultado.error;
+    });
+  </script>
+</body>
+</html>
