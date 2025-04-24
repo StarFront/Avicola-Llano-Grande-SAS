@@ -1,0 +1,20 @@
+       .==;=.                                                      .==;=.
+      / _  _ \                                                    / _  _ \
+     |  o  o  |                                                  |  o  o  |
+     \   /\   /             ,                                    \   /\   /             ,
+    ,/'-=\/=-'\,    |\   /\/ \/|   ,_                           ,/'-=\/=-'\,    |\   /\/ \/|   ,_
+   / /        \ \   ; \/     '; , \_'_,                        / /        \ \   ; \/     '; , \_'_,
+  | /          \ |   \        /                               | /          \ |   \        /
+  \/ \        / \/    '.    .'    /.                          \/ \        / \/    '.    .'    /.
+      '.    .'          ~~ , /\ `                                 '.    .'          ~~ , /\ `
+      _|~~|_              .                                       _|~~|_              .
+      /|\  /|\                                                    /|\  /|\
+					GRANJA AVÍCOLA LLANO GRANDE S.A.S
+					NIT: 870545489-0
+					FACTURA DE VENTA
+					Cliente: ggg
+					Documento: 13456
+					Artículo: 1 cubeta(s) de huevo ROJO tamaño A
+					Subtotal: $12000
+					IVA (5%): $600
+					Total a pagar: $12600

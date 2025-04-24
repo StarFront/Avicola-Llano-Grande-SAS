@@ -313,3 +313,35 @@ body {
     border-color: #ff7b00ff;
   }
   
+.main-footer {
+    background: linear-gradient(to right, #ffaa00, #ff8800);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-logo img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.footer-logo p {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.footer-info p,
+.footer-extra p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+  

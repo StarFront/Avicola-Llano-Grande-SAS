@@ -7,4 +7,4 @@ client = MongoClient(uri)
 db = client["llano_grande"]
 
 huevos_collection = db["huevos"]
-
+ventas_collection=db["ventas"]

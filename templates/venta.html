@@ -55,46 +55,30 @@
   <script>
     const form = document.getElementById("formVenta");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-  const datos = {
-    cliente: document.getElementById("cliente").value,
-    documento: document.getElementById("documento").value,
-    tipo_cliente: document.getElementById("tipo_cliente").value,
-    tipo: document.getElementById("tipo").value,
-    tamaño: document.getElementById("tamano").value,
-    unidad: document.getElementById("unidad").value,
-    cantidad: document.getElementById("cantidad").value
-  };
+      const datos = {
+        cliente: document.getElementById("cliente").value,
+        documento: document.getElementById("documento").value,
+        tipo_cliente: document.getElementById("tipo_cliente").value,
+        tipo: document.getElementById("tipo").value,
+        tamaño: document.getElementById("tamano").value,
+        unidad: document.getElementById("unidad").value,
+        cantidad: document.getElementById("cantidad").value
+      };
 
-  const respuesta = await fetch("/vender_huevos", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(datos)
-  });
+      const respuesta = await fetch("/vender_huevos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(datos)
+      });
 
-  // Verifica si la respuesta es un archivo
-  if (respuesta.ok) {
-    const contentDisposition = respuesta.headers.get("Content-Disposition");
-    const filename = contentDisposition.split("filename=")[1].replace(/"/g, "");
-    const blob = await respuesta.blob();
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.style.display = "none";
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
-  } else {
-    const result = await respuesta.json();
-    document.getElementById("respuesta").textContent = result.mensaje;
-  }
-});
-
+      const resultado = await respuesta.json();
+      document.getElementById("respuesta").textContent = resultado.mensaje;
+    });
   </script>
 </body>
 </html>

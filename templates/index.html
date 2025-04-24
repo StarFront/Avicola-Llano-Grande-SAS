@@ -38,7 +38,8 @@
     <!-- Contador de ventas -->
     <section class="contador">
         <h2>Ventas realizadas:</h2>
-        <p id="contador-ventas">0</p>
+        <p id="contador-ventas">{{ total_ventas }}</p>
+
     </section>
 
     <!-- Crítica bizarramente malvada a los pollos -->
@@ -79,4 +80,22 @@
 
 
 </body>
+<!-- Footer -->
+<footer class="main-footer">
+    <div class="footer-content">
+        <div class="footer-logo">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Footer">
+            <p>Llano Grande SAS</p>
+        </div>
+        <div class="footer-info">
+            <p>Contacto: ventas@llanogrande.com</p>
+            <p>Tel: +57 320 123 4567</p>
+            <p>Dirección: Vereda El Huevo, Villavicencio</p>
+        </div>
+        <div class="footer-extra">
+            <p>“El sabor del campo... más o menos.”</p>
+            <p>&copy; 2025 Llano Grande. Todos los derechos dudablemente reservados.</p>
+        </div>
+    </div>
+</footer>
 </html>

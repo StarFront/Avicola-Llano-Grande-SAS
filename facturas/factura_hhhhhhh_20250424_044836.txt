@@ -1,0 +1,21 @@
+
+       .==;=.                                                      .==;=.
+      / _  _ \                                                    / _  _ \
+     |  o  o  |                                                  |  o  o  |
+     \   /\   /             ,                                    \   /\   /             ,
+    ,/'-=\/=-'\,    |\   /\/ \/|   ,_                           ,/'-=\/=-'\,    |\   /\/ \/|   ,_
+   / /        \ \   ; \/     '; , \_'_,                        / /        \ \   ; \/     '; , \_'_,
+  | /          \ |   \        /                               | /          \ |   \        /
+  \/ \        / \/    '.    .'    /.                          \/ \        / \/    '.    .'    /.
+      '.    .'          ~~ , /\ `                                 '.    .'          ~~ , /\ `
+      _|~~|_              .                                       _|~~|_              .
+      /|\  /|\                                                    /|\  /|\
+					GRANJA AVÍCOLA LLANO GRANDE S.A.S
+					NIT: 870545489-0
+					FACTURA DE VENTA
+					Cliente: hhhhhhh
+					Documento: 67567
+					Artículo: 2 cubeta(s) de huevo BLANCO tamaño EXTRA
+					Subtotal: $28000
+					IVA (5%): $1400
+					Total a pagar: $29400

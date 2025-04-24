@@ -1,8 +1,7 @@
 import os
 from datetime import datetime
-from flask import Response
 from flask import Flask, request, jsonify, render_template
-from connection import huevos_collection
+from connection import huevos_collection,ventas_collection
 
 
 app = Flask(__name__)
@@ -14,7 +13,8 @@ PRECIOS = {
 
 @app.route('/')
 def home():
-    return render_template("index.html")
+    total_ventas = ventas_collection.count_documents({}) 
+    return render_template("index.html", total_ventas=total_ventas)  
 
 @app.route('/registro')
 def registro():
@@ -53,15 +53,11 @@ def registrar_huevos():
 
     return jsonify({"mensaje": "Huevos registrados correctamente"}), 200
 
-import os
-from datetime import datetime
-from flask import Flask, request, jsonify, render_template
-from connection import huevos_collection
-
 
 @app.route('/venta')
 def venta():
     return render_template('venta.html')
+
 
 
 @app.route('/vender_huevos', methods=['POST'])
@@ -106,24 +102,68 @@ def vender_huevos():
     nuevo_stock = existente["stock_unidades"] - unidades
     huevos_collection.update_one(filtro, {"$set": {"stock_unidades": nuevo_stock}})
 
-    # Crear factura en memoria
-    factura_lines = []
-    factura_lines.append(f"Factura de venta - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-    factura_lines.append(f"Cliente: {cliente}\n")
-    factura_lines.append(f"Documento: {documento}\n")
-    factura_lines.append(f"Tipo de cliente: {tipo_cliente}\n")
-    factura_lines.append(f"Artículo: {cantidad} {unidad.lower()}(s) de huevo {tipo} tamaño {tamaño}\n")
-    factura_lines.append(f"Subtotal: ${subtotal}\n")
-    factura_lines.append(f"IVA (5%): ${iva}\n")
-    factura_lines.append(f"Total a pagar: ${total}\n")
-    print(data)
-    # Devolver factura como respuesta para descarga
-    content = "\n".join(factura_lines)
-    return Response(content, mimetype='text/plain', headers={
-        'Content-Disposition': f'attachment; filename=factura_{cliente.replace(" ", "_")}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.txt'
+    ventas_collection.insert_one({
+        "cliente": cliente,
+        "documento": documento,
+        "tipo_cliente": tipo_cliente,
+        "tipo": tipo,
+        "tamaño": tamaño,
+        "unidad": unidad,
+        "cantidad": cantidad,
+        "fecha": datetime.now()
     })
+    # Crear factura
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    nombre_archivo = f"factura_{cliente.replace(' ', '_')}_{timestamp}.txt"
+    ruta_factura = os.path.join("facturas", nombre_archivo)
+
+    os.makedirs("facturas", exist_ok=True)
+
+    with open(ruta_factura, "w", encoding="utf-8") as f:
+        logo_gallina = [
+            "       .==;=.",
+            "      / _  _ \\",
+            "     |  o  o  |",
+            "     \\   /\\   /             ,",
+            "    ,/'-=\\/=-'\\,    |\\   /\\/ \\/|   ,_",
+            "   / /        \\ \\   ; \\/     '; , \\_'_,",
+            "  | /          \\ |   \\        /",
+            "  \\/ \\        / \\/    '.    .'    /.",
+            "      '.    .'          ~~ , /\\ `",
+            "      _|~~|_              .",
+            "      /|\\  /|\\"
+        ]
+
+        logo_huevo = [
+            "       .==;=.",
+            "      / _  _ \\",
+            "     |  o  o  |",
+            "     \\   /\\   /             ,",
+            "    ,/'-=\\/=-'\\,    |\\   /\\/ \\/|   ,_",
+            "   / /        \\ \\   ; \\/     '; , \\_'_,",
+            "  | /          \\ |   \\        /",
+            "  \\/ \\        / \\/    '.    .'    /.",
+            "      '.    .'          ~~ , /\\ `",
+            "      _|~~|_              .",
+            "      /|\\  /|\\"
+        ]
+        f.write("\n")
+        for izquierda, derecha in zip(logo_gallina, logo_huevo):
+            linea = izquierda.ljust(60) + derecha + "\n"
+            f.write(linea)
+
+        f.write("\t\t\t\t\tGRANJA AVÍCOLA LLANO GRANDE S.A.S\n")
+        f.write("\t\t\t\t\tNIT: 870545489-0\n")
+        f.write("\t\t\t\t\tFACTURA DE VENTA\n")
+        f.write(f"\t\t\t\t\tCliente: {cliente}\n")
+        f.write(f"\t\t\t\t\tDocumento: {documento}\n")
+        f.write(f"\t\t\t\t\tArtículo: {cantidad} {unidad.lower()}(s) de huevo {tipo} tamaño {tamaño}\n")
+        f.write(f"\t\t\t\t\tSubtotal: ${subtotal}\n")
+        f.write(f"\t\t\t\t\tIVA (5%): ${iva}\n")
+        f.write(f"\t\t\t\t\tTotal a pagar: ${total}\n")
+    
+    return jsonify({"mensaje": f"Venta realizada con éxito. Factura generada: {nombre_archivo}"}), 200
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))  # Render usa esta variable
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)
